@@ -8,11 +8,11 @@ import './App.css';
 import logo from './statics/logo.svg'
 import { Col, Spin } from 'antd';
 import { getPokemonswithDetails, setLoading } from './actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const pokemons = useSelector(state => state.pokemons);
-  const loading = useSelector(state => state.loading);
+  const pokemons = useSelector(state => state.getIn(['data','pokemons'], shallowEqual)).toJS();
+  const loading = useSelector(state => state.getIn(['ui', 'loading']));
   const dispatch = useDispatch();
 
   useEffect(() => {
